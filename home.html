@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quotes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="a"></div>
+    <div id="b"></div>
+    <button onclick="getnewQuotes()">New Quotes</button>
+    <script>
+        let data2 = "";
+        let quotes = document.getElementById("a");
+        let author= document.getElementById("b");
+
+        const getnewQuotes = () => {
+            let rnum = Math.floor(Math.random() * 10);
+            quotes.innerText = `${data2.quotes[rnum].quote}`;
+            author.innerText = `${data2.quotes[rnum].author}`;
+            console.log(data2.quotes[rnum]);
+        };
+
+        const getquotes = async () => {
+            let api = "https://dummyjson.com/quotes";
+            try {
+                const data = await fetch(api);
+                data2 = await data.json();
+                getnewQuotes();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        getquotes();
+    </script>
+</body>
+</html>
